@@ -30,6 +30,10 @@ module RethinkDB
       StreamTerm.new(TermType::LIMIT, [self, n])
     end
 
+    def zip
+      StreamTerm.new(TermType::ZIP, [self])
+    end
+
     def [](key)
       StreamTerm.new(TermType::BRACKET, [self, key])
     end
@@ -48,6 +52,10 @@ module RethinkDB
 
     def pluck(*args)
       StreamTerm.new(TermType::PLUCK, [self] + args.to_a)
+    end
+
+    def eq_join(table, callable)
+      StreamTerm.new(TermType::EQ_JOIN, [self, table, callable])
     end
 
     def concat_map(callable)

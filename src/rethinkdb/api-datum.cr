@@ -10,8 +10,16 @@ module RethinkDB
       DatumTerm.new(TermType::COUNT, [self, Func.arity1 {|row| yield(row) }])
     end
 
-    def merge(other)
-      DatumTerm.new(TermType::MERGE, [self, other])
+    def merge(callable)
+      DatumTerm.new(TermType::MERGE, [self, callable])
+    end
+
+    def merge
+      DatumTerm.new(TermType::MERGE, [self, Func.arity1 {|row| yield(row) }])
+    end
+
+    def set_insert(value)
+      DatumTerm.new(TermType::SET_INSERT, [self, value])
     end
 
     def default(value)
