@@ -354,6 +354,10 @@ module RethinkDB
       DatumTerm.new(TermType::CONTAINS, [self, Func.arity1 {|row| yield(row) }])
     end
 
+    def has_fields(other)
+      DatumTerm.new(TermType::HAS_FIELDS, [self, other])
+    end
+
     def order_by
       DatumTerm.new(TermType::ORDER_BY, [self, Func.arity1 {|row| yield(row) }])
     end
