@@ -6,6 +6,10 @@ module RethinkDB
       DatumTerm.new(TermType::COUNT, [self])
     end
 
+    def to_iso8601
+      DatumTerm.new(TermType::TO_ISO8601, [self])
+    end
+
     def count
       DatumTerm.new(TermType::COUNT, [self, Func.arity1 {|row| yield(row) }])
     end
